@@ -93,7 +93,13 @@ namespace pcPort
                 this.Invoke((EventHandler)(delegate
                 {
                     //追加的形式添加到文本框末端，并滚动到最后。
-                    this.rx.AppendText(utilHelper.utilHelper.byte2str(recBuf));
+                    if(rxHex==false)
+                        this.rx.AppendText(utilHelper.utilHelper.byte2str(recBuf));
+                    else
+                    {
+                        string s = utilHelper.utilHelper.byte2str(recBuf);
+                        this.rx.AppendText(utilHelper.utilHelper.ascii2hex(s));
+                    }
                     this.rxCountNum += readCount;
                     this.rxCount.Text = rxCountStr + rxCountNum.ToString();
                 }));
